@@ -8,12 +8,13 @@
     <meta name="author" content="Pylons Project">
     <link rel="shortcut icon" href="${request.static_url('web:static/pyramid-16x16.png')}">
 
-    <title>Starter Scaffold for The Pyramid Web Framework</title>
+    <title>Login</title>
 
   </head>
 
   <body>
-	<p><a href="/login">Log in</a></p>
+	<p>Username</p>
+	<p>Password</p>
 
   </body>
 </html>
