@@ -26,7 +26,7 @@ def check_login(username, password):
 	global db
 	os.chdir(os.environ['gtm_data_dir'])
 	
-	db.execute('d loginLowLevel^user("{0}","{1}")'.format(username, password))
+	db.execute(b'd loginLowLevel^user("{0}","{1}")'.format(username.encode('ascii', 'xmlcharrefreplace'), password.encode('ascii', 'xmlcharrefreplace')))
 	result = int(db.get('%sess("authenticated")')), int(db.get('%sess("uid")'))
 
 	os.chdir(originalDir)
