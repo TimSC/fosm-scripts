@@ -1,4 +1,7 @@
 profile
 *.o
 *.pyc
-
+xapi
+xapid
+web/web.egg-info/
+web/.coveragerc

@@ -32,9 +32,9 @@ xmlNew(query,errors)	; Generate new user form
 	w "</Form>",!
 	q
 	
-create	; Public ; Create user account
+createInsertIntoDb	; Public ; Update database with new pending user
 	;	
-	n query,email,emailConfirmation,name,password,passwordConfirmation,emailToken,errors
+	n query,email,emailConfirmation,name,password,passwordConfirmation,emailToken
 	;
 	;
 	s errors=0
@@ -63,8 +63,10 @@ create	; Public ; Create user account
 	;
 	; TODO: Need to check if this username is already registered (if sha256Password exists then account has already been registered/claimed
 	;
-	; Punt if there are errors in the form
-	i errors d xmlNew(.query,.errors) q
+	; Stop if there are errors in the form
+	s %sess("errors")=errors
+	s %sess("uid")=0
+	i errors q
 	;
 	l +^id("pendingUid")
 	s uid=$g(^id("pendingUid"),100000000)+1
@@ -92,6 +94,20 @@ create	; Public ; Create user account
 	s ^userLog(userLogId,"email")=email
 	s ^userLog(userLogId,"name")=name
 	s ^userLog(userLogId,"osm")=claimOsmName
+	;
+	s %sess("uid")=uid
+	q
+
+createInformByEmail	; Public ; Inform user and admin of new user
+	;
+	d unpackQuery^rest(.query,%ENV("POST_DATA"))
+	;
+	s email=query("userEmail")
+	s emailConfirmation=query("userEmailConfirmation")
+	s name=query("userDisplayName")
+	s password=query("userPassCrypt")
+	s passwordConfirmation=query("userPassCryptConfirmation")
+	s claimOsmName=$g(query("claimOsmName"))
 	;
 	s currentDevice=$i
 	;
@@ -155,6 +171,17 @@ create	; Public ; Create user account
 	;
 	q
 	
+create	; Public ; Create user account
+	;
+	n errors
+	d createInsertIntoDb
+	;
+	; Punt if there are errors in the form
+	i errors d xmlNew(.query,.errors) q
+	;
+	d createInformByEmail
+	;
+	q
 	
 error(errors,field,message)	; Add an error message to the errors object
 	s errors=errors+1
