@@ -32,9 +32,9 @@ xmlNew(query,errors)	; Generate new user form
 	w "</Form>",!
 	q
 	
-createInsertIntoDb	; Public ; Update database with new pending user
+createInsertIntoDb(emailToken)	; Public ; Update database with new pending user
 	;	
-	n query,email,emailConfirmation,name,password,passwordConfirmation,emailToken
+	n query,email,emailConfirmation,name,password,passwordConfirmation
 	;
 	;
 	s errors=0
@@ -98,15 +98,12 @@ createInsertIntoDb	; Public ; Update database with new pending user
 	s %sess("uid")=uid
 	q
 
-createInformByEmail	; Public ; Inform user and admin of new user
+createInformByEmail(emailToken)	; Public ; Inform user and admin of new user
 	;
 	d unpackQuery^rest(.query,%ENV("POST_DATA"))
 	;
 	s email=query("userEmail")
-	s emailConfirmation=query("userEmailConfirmation")
 	s name=query("userDisplayName")
-	s password=query("userPassCrypt")
-	s passwordConfirmation=query("userPassCryptConfirmation")
 	s claimOsmName=$g(query("claimOsmName"))
 	;
 	s currentDevice=$i
@@ -159,6 +156,18 @@ createInformByEmail	; Public ; Inform user and admin of new user
 	;
 	o file c file:DELETE
 	;
+	q
+	
+create	; Public ; Create user account
+	;
+	n errors,emailToken
+	d createInsertIntoDb(.emailToken)
+	;
+	; Punt if there are errors in the form
+	i errors d xmlNew(.query,.errors) q
+	;
+	d createInformByEmail(emailToken)
+	;
 	u currentDevice
 	;
 	; Send response to user
@@ -168,18 +177,6 @@ createInformByEmail	; Public ; Inform user and admin of new user
 	d xmlHome^rest("Confirmation",message)
 	;
 	c currentDevice
-	;
-	q
-	
-create	; Public ; Create user account
-	;
-	n errors
-	d createInsertIntoDb
-	;
-	; Punt if there are errors in the form
-	i errors d xmlNew(.query,.errors) q
-	;
-	d createInformByEmail
 	;
 	q
 	

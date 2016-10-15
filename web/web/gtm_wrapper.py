@@ -70,7 +70,25 @@ def create_pending_user(userEmail, userDisplayName, userPassCrypt, claimOsmName)
 	
 	uid = db.get('%sess("uid")')
 	errors = int(db.get('%sess("errors")')) #Not really working
+	emailToken = db.get('%sess("emailToken")')
 
 	os.chdir(originalDir)
-	return uid, errors
+	return uid, errors, emailToken
+
+def notify_new_user(userEmail, userDisplayName, claimOsmName, emailToken):
+	global db
+	os.chdir(os.environ['gtm_data_dir'])
+
+	postData = []
+	postData.append(b"userEmail={0}".format(Enc(userEmail)))
+	postData.append(b"userDisplayName={0}".format(Enc(userDisplayName)))
+	postData.append(b"claimOsmName={0}".format(Enc(claimOsmName)))
+	postStr = "&".join(postData)
+	
+	db.set(b'%ENV("POST_DATA")', postStr)
+
+	db.execute(b'd createInformByEmail^user("{0}")'.format(emailToken))
+
+	os.chdir(originalDir)
+	return None
 
