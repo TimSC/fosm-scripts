@@ -25,9 +25,11 @@ def login_view(request):
 	if 'form.submitted' in request.params:
 		login = request.params['login']
 		password = request.params['password']
-		ok, username = gtm_wrapper.check_login(login, password)
+		ok, uid = gtm_wrapper.check_login(login, password)
 		if ok:
-			request.session["username"] = username
+			userDetails = gtm_wrapper.get_user_details(uid)
+			request.session["username"] = userDetails["display_name"]
+			request.session["account_created"] = userDetails["account_created"]
 			return HTTPFound(location=came_from)
 		message = 'Failed login'
 

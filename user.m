@@ -482,8 +482,7 @@ getConflicts(uid)	; Public ; Get details of edit conflicts
 	. w "/>",$c(13,10)
 	w "</conflict>",$c(13,10)
 	q
-	
-	
+
 getDetails(uid)	; Public ; Get user details and return as xml
 	;
 	d header^http("text/xml")
