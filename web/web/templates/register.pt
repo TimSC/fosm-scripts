@@ -21,10 +21,7 @@
     <title>FOSM :: Create account</title>
   </head>
   <body>
-	<span id="greeting">
-      <a href="/login" id="loginanchor" title="Log in with an existing account">log in</a> |
-      <a href="/user/new" id="registeranchor" title="Create an account for editing">sign up</a>
-	</span>
+	<span tal:define="greeting load: greeting.pt" metal:use-macro="greeting"></span>
 
     <div id="left">
 
