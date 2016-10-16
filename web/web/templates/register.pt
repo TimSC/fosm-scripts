@@ -1,80 +1,41 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0"/>
-    <meta name="description" content="FOSM. Free maps created by a global community of volunteers. Licensed for use freely with attribution and share-alike (CC-BY-SA)." />
-    <meta name="keywords" content="FOSM, OSM, Map, free, CC-BY-SA, wiki, geodata, cartography, ODbL" />
+<head>
+	<meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0"/>
+	<meta name="description" content="FOSM. Free maps created by a global community of volunteers. Licensed for use freely with attribution and share-alike (CC-BY-SA)." />
+	<meta name="keywords" content="FOSM, OSM, Map, free, CC-BY-SA, wiki, geodata, cartography, ODbL" />
 
-    <link href="/static/stylesheets/common.css" media="screen" rel="stylesheet" type="text/css" />
-    <link href="/static/stylesheets/large.css" media="screen" rel="stylesheet" type="text/css" />
-    <link href="/static/stylesheets/small.css" media="only screen and (max-width: 481px)" rel="stylesheet" type="text/css" />
-    <link href="/static/stylesheets/large.css" media="screen and (min-width: 482px)" rel="stylesheet" type="text/css" />
-    <link href="/static/stylesheets/print.css" media="print" rel="stylesheet" type="text/css" />
-    <style>
-      .hidden { display: none }
-      .hide_if_logged_in { display: none }
-      .hide_if_user_ { display: none }
-      .show_if_user_ { display: inline }
-      .hide_unless_administrator { display: none }
-    </style>
+	<link href="/static/stylesheets/common.css" media="screen" rel="stylesheet" type="text/css" />
+	<link href="/static/stylesheets/large.css" media="screen" rel="stylesheet" type="text/css" />
+	<link href="/static/stylesheets/small.css" media="only screen and (max-width: 481px)" rel="stylesheet" type="text/css" />
+	<link href="/static/stylesheets/large.css" media="screen and (min-width: 482px)" rel="stylesheet" type="text/css" />
+	<link href="/static/stylesheets/print.css" media="print" rel="stylesheet" type="text/css" />
+	<style>
+	  .hidden { display: none }
+	  .hide_if_logged_in { display: none }
+	  .hide_if_user_ { display: none }
+	  .show_if_user_ { display: inline }
+	  .hide_unless_administrator { display: none }
+	</style>
 
-    <title>FOSM :: Create account</title>
-  </head>
-  <body>
-	<span tal:define="greeting load: greeting.pt" metal:use-macro="greeting"></span>
+	<title>FOSM :: Create account</title>
+</head>
+<body>
+<span tal:define="greeting load: greeting.pt" metal:use-macro="greeting"></span>
 
-    <div id="left">
+<div id="left" tal:define="leftbar load: leftbar.pt" metal:use-macro="leftbar"></div>
 
-
-      <div id="logo">
-        <center>
-
-          <h1>FOSM</h1>
-          <a href="/"><img alt="FOSM logo" border="0" height="120" src="/static/FOSM.png" width="120" /></a><br/>
-          <h2 class="nowrap">A Free Wiki World Map</h2>
-        </center>
-      </div>
-
-
-      <div id="intro">
-        <p>
-          FOSM is a liberally licensed and community created map of this planet.
-        </p>
-        <p>
-          FOSM allows you to collaboratively create and use maps of anywhere and everywhere.
-        </p>
-        <p>
-        FOSM is built and supported by the community.
-        </p>
-
-      </div>
-
-      <div id="left_menu" class="left_menu">
-        <a href="/contribute" title="Learn how to contribute to the maps">Contribute</a><br />
-        <a href="/copyright" title="Learn how the content is protected by copyright">Copyright</a><br />
-        <a href="/license" title="Learn about the liberal license under which you can use FOSM content">License</a><br />
-        <a href="/attribution" title="Learn about who has contributed to the FOSM map">Attribution</a><br />
-      </div>
-
-      <center>
-        <div class="donate">
-          <a href="/donate" title="Give some money to support FOSM">Donations</a>
-        </div>
-      </center>
-
-    </div>
-
-    <div id="content">
-	  <div id="notice">
-		FOSM is licensed under Creative Commons CC-BY-SA 2.0 :: More data than OSM and a better license for contributors.
-	  </div>
-      <h2>Create a User Account</h2>
+<div id="content">
+  <div id="notice">
+	FOSM is licensed under Creative Commons CC-BY-SA 2.0 :: More data than OSM and a better license for contributors.
+  </div>
+  <h2>Create a User Account</h2>
 
 <p>
 Fill in these details and then wait for an email with instructions on how to activate your account.
 </p>
 
-<form action="/user/create" method="POST">
+<form action="/register" method="POST">
 
 <!-- If there's a message then display it here -->
 
@@ -168,10 +129,9 @@ href='http://creativecommons.org/licenses/by-sa/2.0/'>Creative Commons Attributi
   
   <tr><td colspan="2">&nbsp;<!--vertical spacer--></td></tr>
 
-  <tr><td></td><td align="right"><input type="submit" value="Create Account" tabindex="6"/></td></tr>
+  <tr><td></td><td align="right"><input type="submit" name="form.submitted" value="Create Account" tabindex="6"/></td></tr>
 </table>
 </form>
-
 
 </div>
 

@@ -61,7 +61,7 @@ def create_pending_user(userEmail, userDisplayName, userPassCrypt, claimOsmName)
 	postData.append(b"userDisplayName={0}".format(Enc(userDisplayName)))
 	postData.append(b"userPassCrypt={0}".format(Enc(userPassCrypt)))
 	postData.append(b"userPassCryptConfirmation={0}".format(Enc(userPassCrypt)))
-	postData.append(b"claimOsmName={0}".format(Enc(claimOsmName)))
+	postData.append(b"claimOsmName={0}".format('on' if claimOsmName else 'off'))
 	postStr = "&".join(postData)
 	
 	db.set(b'%ENV("POST_DATA")', postStr)

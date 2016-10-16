@@ -1,0 +1,40 @@
+<div id="left" metal:define-macro="leftbar">
+
+  <div id="logo">
+    <center>
+
+      <h1>FOSM</h1>
+      <a href="/"><img alt="FOSM logo" border="0" height="120" src="/static/FOSM.png" width="120" /></a><br/>
+      <h2 class="nowrap">A Free Wiki World Map</h2>
+    </center>
+  </div>
+
+
+  <div id="intro">
+    <p>
+      FOSM is a liberally licensed and community created map of this planet.
+    </p>
+    <p>
+      FOSM allows you to collaboratively create and use maps of anywhere and everywhere.
+    </p>
+    <p>
+    FOSM is built and supported by the community.
+    </p>
+
+  </div>
+
+  <div id="left_menu" class="left_menu">
+    <a href="/contribute" title="Learn how to contribute to the maps">Contribute</a><br />
+    <a href="/copyright" title="Learn how the content is protected by copyright">Copyright</a><br />
+    <a href="/license" title="Learn about the liberal license under which you can use FOSM content">License</a><br />
+    <a href="/attribution" title="Learn about who has contributed to the FOSM map">Attribution</a><br />
+  </div>
+
+  <center>
+    <div class="donate">
+      <a href="/donate" title="Give some money to support FOSM">Donations</a>
+    </div>
+  </center>
+
+</div>
+

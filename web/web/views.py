@@ -15,19 +15,40 @@ def home_view(request):
 @view_config(route_name='register', renderer='templates/register.pt')
 def register_view(request):
 
+	userEmail = request.params.get('userEmail')
+	userEmailConfirmation = request.params.get('userEmailConfirmation', '')
+	userDisplayName = request.params.get('userDisplayName', '')
+	userPassCrypt = request.params.get('userPassCrypt', '')
+	userPassCryptConfirmation = request.params.get('userPassCryptConfirmation', '')
+	claimOsmName = request.params.get('claimOsmName', 'off') == 'on'
+
+	errors = 0
+	if 'form.submitted' in request.params:
+		if userEmail != userEmailConfirmation:
+			errors += 1
+		if userPassCrypt != userPassCryptConfirmation:
+			errors += 1
+		if len(userPassCrypt) < 6:
+			errors += 1
+		if len(userDisplayName) < 3:
+			errors += 1
+
+		if errors == 0:
+			uid, errors, emailToken = db_wrapper.create_pending_user(userEmail, userDisplayName, userPassCrypt, claimOsmName)
+
 	username = None
 	if "username" in request.session:
 		username = request.session["username"]
 
 	return {'logged_in': username,
 		'messageOccured': False,
-		'errorOccured': False,
-		'userEmail': "",
-		'userEmailConfirmation': "",
-		'userDisplayName': "",
-		'userPassCrypt': "",
-		'userPassCryptConfirmation': "",
-		'claimOsmName': False
+		'errorOccured': errors > 0,
+		'userEmail': userEmail,
+		'userEmailConfirmation': userEmailConfirmation,
+		'userDisplayName': userDisplayName,
+		'userPassCrypt': userPassCrypt,
+		'userPassCryptConfirmation': userPassCryptConfirmation,
+		'claimOsmName': claimOsmName
 		}
 
 @view_config(route_name='login', renderer='templates/login.pt')
