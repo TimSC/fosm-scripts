@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0"/>
+    <meta name="description" content="FOSM. Free maps created by a global community of volunteers. Licensed for use freely with attribution and share-alike (CC-BY-SA)." />
+    <meta name="keywords" content="FOSM, OSM, Map, free, CC-BY-SA, wiki, geodata, cartography, ODbL" />
+
+    <link href="/static/stylesheets/common.css" media="screen" rel="stylesheet" type="text/css" />
+    <link href="/static/stylesheets/large.css" media="screen" rel="stylesheet" type="text/css" />
+    <link href="/static/stylesheets/small.css" media="only screen and (max-width: 481px)" rel="stylesheet" type="text/css" />
+    <link href="/static/stylesheets/large.css" media="screen and (min-width: 482px)" rel="stylesheet" type="text/css" />
+    <link href="/static/stylesheets/print.css" media="print" rel="stylesheet" type="text/css" />
+    <style>
+      .hidden { display: none }
+      .hide_if_logged_in { display: none }
+      .hide_if_user_ { display: none }
+      .show_if_user_ { display: inline }
+      .hide_unless_administrator { display: none }
+    </style>
+
+    <title>FOSM :: Create account</title>
+  </head>
+  <body>
+	<span id="greeting">
+      <a href="/login" id="loginanchor" title="Log in with an existing account">log in</a> |
+      <a href="/user/new" id="registeranchor" title="Create an account for editing">sign up</a>
+	</span>
+
+    <div id="left">
+
+
+      <div id="logo">
+        <center>
+
+          <h1>FOSM</h1>
+          <a href="/"><img alt="FOSM logo" border="0" height="120" src="/static/FOSM.png" width="120" /></a><br/>
+          <h2 class="nowrap">A Free Wiki World Map</h2>
+        </center>
+      </div>
+
+
+      <div id="intro">
+        <p>
+          FOSM is a liberally licensed and community created map of this planet.
+        </p>
+        <p>
+          FOSM allows you to collaboratively create and use maps of anywhere and everywhere.
+        </p>
+        <p>
+        FOSM is built and supported by the community.
+        </p>
+
+      </div>
+
+      <div id="left_menu" class="left_menu">
+        <a href="/contribute" title="Learn how to contribute to the maps">Contribute</a><br />
+        <a href="/copyright" title="Learn how the content is protected by copyright">Copyright</a><br />
+        <a href="/license" title="Learn about the liberal license under which you can use FOSM content">License</a><br />
+        <a href="/attribution" title="Learn about who has contributed to the FOSM map">Attribution</a><br />
+      </div>
+
+      <center>
+        <div class="donate">
+          <a href="/donate" title="Give some money to support FOSM">Donations</a>
+        </div>
+      </center>
+
+    </div>
+
+    <div id="content">
+	  <div id="notice">
+		FOSM is licensed under Creative Commons CC-BY-SA 2.0 :: More data than OSM and a better license for contributors.
+	  </div>
+      <h2>Create a User Account</h2>
+
+<p>
+Fill in these details and then wait for an email with instructions on how to activate your account.
+</p>
+
+<form action="/user/create" method="POST">
+
+<!-- If there's a message then display it here -->
+
+  <div tal:condition="messageOccured" class="errorExplanation" id="errorExplanation">
+    <h2>Message</h2>
+    <p>Content</p>
+  </div>
+
+<!-- If there are errors then display them here -->
+  <div tal:condition="errorOccured" class="errorExplanation" id="errorExplanation">
+    <h2>There were X errors with this form</h2>
+    <ul>
+    <li>Zonk</li>
+    </ul>
+  </div>
+
+<table id="signupForm">
+  <tr>
+    <td width="300px" class="fieldName">Email Address:</td>
+    <td width="400px">
+      <div>
+        <xsl:if test='/Form/Errors/Error[@field="userEmail"]'>
+          <xsl:attribute name="class">fieldWithErrors</xsl:attribute>
+        </xsl:if>
+        <input id="userEmail" maxlength="255" name="userEmail" size="50" tabindex="1" type="text" value='{/Form/@userEmail}'/>
+      </div>
+    </td>
+  </tr>
+  <tr>
+    <td width="300px" class="fieldName">Confirm Email Address:</td>
+    <td width="400px">
+      <div>
+        <xsl:if test='/Form/Errors/Error[@field="userEmailConfirmation"]'>
+          <xsl:attribute name="class">fieldWithErrors</xsl:attribute>
+        </xsl:if>
+        <input id="userEmailConfirmation" maxlength="255" name="userEmailConfirmation" size="50" tabindex="2" type="text" 
+
+value='{/Form/@userEmailConfirmation}'/>
+      </div>
+    </td>
+  </tr>
+
+  <tr><td></td><td><span class="minorNote">Not displayed publicly (see <a href="/PrivacyPolicy.html" title="Privacy policy">privacy policy</a>)
+
+</span></td></tr>
+
+  <tr><td colspan="2">&nbsp;<!--vertical spacer--></td></tr>
+
+
+  <tr>
+    <td width="300px" class="fieldName">Display Name:</td>
+    <td width="400px">
+      <div>
+        <xsl:if test='/Form/Errors/Error[@field="userDisplayName"]'>
+          <xsl:attribute name="class">fieldWithErrors</xsl:attribute>
+        </xsl:if>
+        <input id="userDisplayName" maxlength="255" name="userDisplayName" size="30" tabindex="3" type="text" value='{/Form/@userDisplayName}'/>
+      </div>
+    </td>
+  </tr>
+
+
+  <tr><td></td><td><span class="minorNote">Your publicly displayed username. You can change this later in the preferences.</span></td></tr>
+
+  <tr>
+    <td class="fieldName">If you would like to use the same name as your OpenStreetMap name you can claim it by checking this box (recommended)</td>
+    <td>
+      <input type="checkbox" name="claimOsmName" id="claimOsmName" tabindex="4">
+        <xsl:if test='/Form/@claimOsmName="on"'>
+          <xsl:attribute name="checked">checked</xsl:attribute>
+        </xsl:if>
+      </input>
+    </td>
+  </tr>
+
+  <tr><td colspan="2">&nbsp;<!--vertical spacer--></td></tr>
+
+  <tr>
+    <td width="300px" class="fieldName">Password:</td>
+    <td width="400px">
+      <div>
+        <xsl:if test='/Form/Errors/Error[@field="userPassCrypt"]'>
+          <xsl:attribute name="class">fieldWithErrors</xsl:attribute>
+        </xsl:if>
+        <input id="userPassCrypt" maxlength="255" name="userPassCrypt" size="30" tabindex="5" type="password" value='{/Form/@userPassCrypt}'/>
+      </div>
+    </td>
+  </tr>
+
+  <tr>
+    <td width="300px" class="fieldName">Confirm Password:</td>
+    <td width="400px">
+      <div>
+        <xsl:if test='/Form/Errors/Error[@field="userPassCryptConfirmation"]'>
+          <xsl:attribute name="class">fieldWithErrors</xsl:attribute>
+        </xsl:if>
+        <input id="userPassCryptConfirmation" maxlength="255" name="userPassCryptConfirmation" size="30" tabindex="6" type="password" 
+
+value='{/Form/@userPassCryptConfirmation}'/>
+      </div>
+    </td>
+  </tr>
+
+  <tr><td colspan="2">&nbsp;<!--vertical spacer--></td></tr>
+
+  <tr>
+    <td class='fieldName'>Copyright and License:</td>
+    <td>You confirm that all content uploaded to FreeOSM via this account is contributed by you under the <a 
+
+href='http://creativecommons.org/licenses/by-sa/2.0/'>Creative Commons Attribution Share Alike 2.0</a> License.
+    </td>
+  </tr>
+  
+  <tr><td colspan="2">&nbsp;<!--vertical spacer--></td></tr>
+
+  <tr><td></td><td align="right"><input type="submit" value="Create Account" tabindex="6"/></td></tr>
+</table>
+</form>
+
+
+</div>
+
+</body>
+</html>

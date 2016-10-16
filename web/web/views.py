@@ -4,13 +4,24 @@ import gtm_wrapper as db_wrapper
 #import nulldb_wrapper as db_wrapper
 
 @view_config(route_name='home', renderer='templates/index.pt')
-def my_view(request):
+def home_view(request):
 
 	username = None
 	if "username" in request.session:
 		username = request.session["username"]
 
-	return {'project': 'web', 'logged_in': username}
+	return {'logged_in': username}
+
+@view_config(route_name='register', renderer='templates/register.pt')
+def register_view(request):
+
+	username = None
+	if "username" in request.session:
+		username = request.session["username"]
+
+	return {'logged_in': username,
+		'messageOccured': False,
+		'errorOccured': False}
 
 @view_config(route_name='login', renderer='templates/login.pt')
 def login_view(request):

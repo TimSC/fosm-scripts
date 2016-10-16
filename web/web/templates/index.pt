@@ -10,7 +10,9 @@
 <body>
 	<div id="container">
 		<div id="header">
-			<p class="small" align="right"><a href="/user/new">sign-up</a></p>
+			<p class="small" align="right"><a href="/register">register</a>
+			<a href="/login">log in</a>
+			<a href="/logout">log out</a></p>
 		</div>
 
 		<div id="title">
@@ -37,8 +39,6 @@
 			minutely replication files are available <a href="/planet/minute-replicate/">here</a>.</p>
 
 			<p>${logged_in}</p>
-			<p><a href="/login">Log in</a></p>
-			<p><a href="/logout">Log out</a></p>
 
 		</div>
 
