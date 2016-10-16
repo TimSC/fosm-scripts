@@ -1,6 +1,5 @@
 from pyramid.config import Configurator
 from pyramid.session import SignedCookieSessionFactory
-import auth
 
 def main(global_config, **settings):
 	""" This function returns a Pyramid WSGI application.

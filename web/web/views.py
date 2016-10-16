@@ -1,6 +1,7 @@
 from pyramid.view import view_config
 from pyramid.httpexceptions import HTTPFound
-import gtm_wrapper
+import gtm_wrapper as db_wrapper
+#import nulldb_wrapper as db_wrapper
 
 @view_config(route_name='home', renderer='templates/mytemplate.pt')
 def my_view(request):
@@ -25,9 +26,9 @@ def login_view(request):
 	if 'form.submitted' in request.params:
 		login = request.params['login']
 		password = request.params['password']
-		ok, uid = gtm_wrapper.check_login(login, password)
+		ok, uid = db_wrapper.check_login(login, password)
 		if ok:
-			userDetails = gtm_wrapper.get_user_details(uid)
+			userDetails = db_wrapper.get_user_details(uid)
 			request.session["username"] = userDetails["display_name"]
 			request.session["account_created"] = userDetails["account_created"]
 			return HTTPFound(location=came_from)
