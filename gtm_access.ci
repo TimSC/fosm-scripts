@@ -1,0 +1,8 @@
+gtmget    : void get^%gtmaccess( I:gtm_char_t*, O:gtm_string_t*, O:gtm_char_t* )
+gtminit	  : void init^%gtmaccess( O:gtm_char_t* )
+gtmkill	  : void kill^%gtmaccess( I:gtm_char_t*, O:gtm_char_t* )
+gtmlock	  : void lock^%gtmaccess( I:gtm_char_t*, O:gtm_char_t* )
+gtmorder  : void order^%gtmaccess( I:gtm_char_t*, O:gtm_string_t*, O:gtm_char_t* )
+gtmquery  : void query^%gtmaccess( I:gtm_char_t*, O:gtm_string_t*, O:gtm_char_t* )
+gtmset    : void set^%gtmaccess( I:gtm_char_t*, I:gtm_string_t*, O:gtm_char_t*)
+gtmxecute : void xecute^%gtmaccess( I:gtm_char_t*, O:gtm_char_t* )

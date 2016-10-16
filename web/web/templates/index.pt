@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>FOSM :: The free wiki world map</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+	<meta name="Description" content="FOSM :: The free wiki world map">
+	<link rel="stylesheet" href="static/style.css" type="text/css" />
+</head>
+
+<body>
+	<div id="container">
+		<div id="header">
+			<p class="small" align="right"><a href="/user/new">sign-up</a></p>
+		</div>
+
+		<div id="title">
+			<div id="title_col1">
+				<a href="index.html"><img border="0" src="static/FOSM.png" alt="fosm logo"></a>
+			</div>
+			<div id="title_col2">
+				<h1>fosm</h1>
+				<p>fosm is a free map of the planet which anyone can use and contribute to.
+				It is a fork of OpenStreetMap licensed under the Creative Commons attribution
+				and share-alike license CC-BY-SA.</p>
+			</div>
+		</div>
+
+		<div id="column1">
+			<h2>Geodata</h2>
+			<p><img border="1" src="static/data.png" alt="xml data" width="200"></p>
+			<p>Our geodata is stored in standard OpenStreetMap format as a set of points, 
+			lines and areas making it usable for many purposes.</p>
+			<p> It can be used to make custom designed maps, to create routing applications
+			or to produce interesting data analyses. Most tools that work with OSM data will 
+			also work with fosm.</p>
+			<p>A full copy of our planet earth database is available <a href="/planet/">here</a> and   
+			minutely replication files are available <a href="/planet/minute-replicate/">here</a>.</p>
+
+			<p>${logged_in}</p>
+			<p><a href="/login">Log in</a></p>
+			<p><a href="/logout">Log out</a></p>
+
+		</div>
+
+		<div id="col2outer">
+			<div id="column2">
+				<h2>Contribute</h2>
+				<p><img border="1" src="static/josm.png" alt="josm" width="200"></p>
+				<p>New contributors are very welcome.</p>
+				<p>If you would like to try it out just <a href="/user/new">create an
+				account</a> and configure your favorite editor. We currently support JOSM and Merkaartor.
+				Please see our <a href="gettingStarted.html">getting started</a> page for more information.</p>
+				<p>Please check our <a href="http://fosm.wikia.com">wiki</a> for further help and please also 
+				join our <a href="http://groups.google.com/group/osm-fork">mailing list</a> to keep up-to-date 
+				with current developments.</p>
+			</div>
+
+			<div id="column3">
+				<h2>Maps</h2>
+				<p class="small">
+				<a href="http://map.fosm.org/">
+				<img border="1" src="static/map1.png" alt="Map"><br>
+				The world rendered with Mapnik</a></p>
+				<p><a href="http://fosm.wikia.com/wiki/Fosm_Map_Renderings">Other maps</a> made with fosm data.</p>
+			</div>
+		</div>
+
+		<div id="footer">
+			<p class="footer">All geospatial content published on this site is the copyright 
+			of fosm contributors and OpenStreetMap contributors. It is licensed under 
+			<a href="http://creativecommons.org/licenses/by-sa/2.0/">CC&nbsp;BY-SA 2.0</a>. 
+			Please refer to our <a href="copyright.html">copyright and license</a> page for details.</p>
+		</div>
+	</div>
+
+</body>
+</html>

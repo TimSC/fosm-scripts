@@ -3,7 +3,7 @@ from pyramid.httpexceptions import HTTPFound
 import gtm_wrapper as db_wrapper
 #import nulldb_wrapper as db_wrapper
 
-@view_config(route_name='home', renderer='templates/mytemplate.pt')
+@view_config(route_name='home', renderer='templates/index.pt')
 def my_view(request):
 
 	username = None

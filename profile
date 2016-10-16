@@ -1,4 +1,4 @@
-zappy='/home/tim/extra/dev/fosm' ; export zappy
+zappy='/srv/fosm' ; export zappy
 export gtm_dist="$zappy/gtm"; export gtm_dist
 gtmx="$zappy/gtmx"; export gtmx
 gtmgbldir="$zappy/data/xapi.gld"; export gtmgbldir
