@@ -125,7 +125,7 @@ createInformByEmail(emailToken)	; Public ; Inform user and admin of new user
 	w !
 	w "Please click the link below to confirm your request:",!
 	w "http://www.fosm.org/confirmuser/?token="_emailToken,!
-	w !1
+	w !
 	w "If you did not apply for an account at FOSM please ignore this message and accept our apologies.",!
 	w !
 	w "Thank you.",!

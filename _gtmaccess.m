@@ -1,11 +1,3 @@
-; This implements a small demonstration of an API created in GT.M that
-; can be called from a C main() program.
-; No claim of copyright is made with respect to this code
-;
-; This program is only a demonstration.  Please ensure that you have a
-; correctly configured GT.M installation.
-;
-; Please do not use this code as-is in a production environment.
 ;
 %gtmaccess	; entry points to access GT.M
 	quit
