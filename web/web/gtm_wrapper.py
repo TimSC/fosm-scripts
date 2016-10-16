@@ -92,9 +92,15 @@ def notify_new_user(userEmail, userDisplayName, claimOsmName, emailToken):
 	os.chdir(originalDir)
 	return None
 
-def confirm_user(token):
-	
-	# '$d(^pendingUserx("emailToken",token)) d error^http q
+def get_uid_from_token(token):
+	global db
+	os.chdir(os.environ['gtm_data_dir'])
 
-	pass
+	db.execute(b'd getUidFromToken^user("{0}")'.format(Enc(token)))
+	if not int(db.get('exists')):
+		raise RuntimeError("User not found")
+	uid = int(db.get('uid'))
+
+	os.chdir(originalDir)	
+	return uid
 
