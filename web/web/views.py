@@ -1,7 +1,9 @@
 from pyramid.view import view_config
 from pyramid.httpexceptions import HTTPFound
-import gtm_wrapper as db_wrapper
-#import nulldb_wrapper as db_wrapper
+import gtm_wrapper
+#import nulldb_wrapper
+
+db_wrapper = gtm_wrapper.GtmWrapper()
 
 @view_config(route_name='home', renderer='templates/index.pt')
 def home_view(request):
@@ -101,7 +103,7 @@ def logout_view(request):
 def confirm_user_view(request):
 
 	token = request.params.get('token')
-	db_wrapper.confirm_user(token)
+	#db_wrapper.confirm_user(token)
 
 	url = request.route_url('home')
 	return HTTPFound(location=url)
