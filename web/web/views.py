@@ -21,7 +21,14 @@ def register_view(request):
 
 	return {'logged_in': username,
 		'messageOccured': False,
-		'errorOccured': False}
+		'errorOccured': False,
+		'userEmail': "",
+		'userEmailConfirmation': "",
+		'userDisplayName': "",
+		'userPassCrypt': "",
+		'userPassCryptConfirmation': "",
+		'claimOsmName': False
+		}
 
 @view_config(route_name='login', renderer='templates/login.pt')
 def login_view(request):
