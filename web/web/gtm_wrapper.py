@@ -92,3 +92,9 @@ def notify_new_user(userEmail, userDisplayName, claimOsmName, emailToken):
 	os.chdir(originalDir)
 	return None
 
+def confirm_user(token):
+	
+	# '$d(^pendingUserx("emailToken",token)) d error^http q
+
+	pass
+

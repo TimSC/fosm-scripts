@@ -66,6 +66,7 @@ createInsertIntoDb(emailToken)	; Public ; Update database with new pending user
 	; Stop if there are errors in the form
 	s %sess("errors")=errors
 	s %sess("uid")=0
+	s %sess("emailToken")=""
 	i errors q
 	;
 	l +^id("pendingUid")
@@ -96,6 +97,7 @@ createInsertIntoDb(emailToken)	; Public ; Update database with new pending user
 	s ^userLog(userLogId,"osm")=claimOsmName
 	;
 	s %sess("uid")=uid
+	s %sess("emailToken")=emailToken
 	q
 
 createInformByEmail(emailToken)	; Public ; Inform user and admin of new user
@@ -122,8 +124,8 @@ createInformByEmail(emailToken)	; Public ; Inform user and admin of new user
 	w "Thank you for requesting an account to contribute to fosm.org.",!
 	w !
 	w "Please click the link below to confirm your request:",!
-	w "http://www.fosm.org/user/confirm/"_emailToken,!
-	w !
+	w "http://www.fosm.org/confirmuser/?token="_emailToken,!
+	w !1
 	w "If you did not apply for an account at FOSM please ignore this message and accept our apologies.",!
 	w !
 	w "Thank you.",!

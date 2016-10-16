@@ -21,6 +21,9 @@ def register_view(request):
 	userPassCrypt = request.params.get('userPassCrypt', '')
 	userPassCryptConfirmation = request.params.get('userPassCryptConfirmation', '')
 	claimOsmName = request.params.get('claimOsmName', 'off') == 'on'
+	messageOccured = False
+	messageContent = None
+	registerSuccess = False
 
 	errors = 0
 	if 'form.submitted' in request.params:
@@ -36,19 +39,26 @@ def register_view(request):
 		if errors == 0:
 			uid, errors, emailToken = db_wrapper.create_pending_user(userEmail, userDisplayName, userPassCrypt, claimOsmName)
 
+		if errors == 0:
+			messageOccured=True
+			messageContent="Thank you. Please check your email."
+			registerSuccess=True
+
 	username = None
 	if "username" in request.session:
 		username = request.session["username"]
 
 	return {'logged_in': username,
-		'messageOccured': False,
+		'messageOccured': messageOccured,
+		'messageContent': messageContent,
 		'errorOccured': errors > 0,
 		'userEmail': userEmail,
 		'userEmailConfirmation': userEmailConfirmation,
 		'userDisplayName': userDisplayName,
 		'userPassCrypt': userPassCrypt,
 		'userPassCryptConfirmation': userPassCryptConfirmation,
-		'claimOsmName': claimOsmName
+		'claimOsmName': claimOsmName,
+		'registerSuccess': registerSuccess,
 		}
 
 @view_config(route_name='login', renderer='templates/login.pt')
@@ -84,6 +94,15 @@ def login_view(request):
 def logout_view(request):
 
 	request.session.invalidate()
+	url = request.route_url('home')
+	return HTTPFound(location=url)
+
+@view_config(route_name='confirmuser')
+def confirm_user_view(request):
+
+	token = request.params.get('token')
+	db_wrapper.confirm_user(token)
+
 	url = request.route_url('home')
 	return HTTPFound(location=url)
 
