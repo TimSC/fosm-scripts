@@ -433,7 +433,7 @@ confirm	; Public ; Confirm account application
 	q
 	
 	
-approve(pendingUid)	; Approve a pending request
+lowLevelApprove(pendingUid)	; Approve a pending request
 	;
 	n name,email,sha256Password
 	;
@@ -467,6 +467,12 @@ approve(pendingUid)	; Approve a pending request
 	k ^pendingUserx("email",email)
 	k ^pendingUserx("nameOrEmail",email)
 	k ^pendingUserx("emailToken",emailToken)
+	;
+	q
+
+approve(pendingUid)	; Approve a pending request
+	;
+	d lowLevelApprove(pendingUid)
 	;
 	; Log the user in
 	s ^session(%session,"authenticated")=1

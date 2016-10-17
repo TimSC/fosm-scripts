@@ -103,7 +103,9 @@ def logout_view(request):
 def confirm_user_view(request):
 
 	token = request.params.get('token')
-	#db_wrapper.confirm_user(token)
+
+	pendingUid = db_wrapper.get_pending_uid_from_token(token)
+	db_wrapper.confirm_user(pendingUid)
 
 	url = request.route_url('home')
 	return HTTPFound(location=url)

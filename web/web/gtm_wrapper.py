@@ -33,7 +33,7 @@ class GtmWrapper(object):
 		os.chdir(self.originalDir)
 
 	def __del__(self):
-		del db
+		del self.db
 		os.chdir(self.originalDir)	
 
 	def check_login(self, username, password):
@@ -98,7 +98,7 @@ class GtmWrapper(object):
 		os.chdir(self.originalDir)
 		return None
 
-	def get_uid_from_token(self, token):
+	def get_pending_uid_from_token(self, token):
 		global db
 		os.chdir(os.environ['gtm_data_dir'])
 
@@ -106,6 +106,17 @@ class GtmWrapper(object):
 		if not int(self.db.get('exists')):
 			raise RuntimeError("User not found")
 		uid = int(self.db.get('uid'))
+
+		os.chdir(self.originalDir)
+		return uid
+
+	def confirm_user(self, pendingUid):
+		global db
+		os.chdir(os.environ['gtm_data_dir'])
+
+		self.db.execute(b'd lowLevelApprove^user("{0}")'.format(int(pendingUid)))
+
+		uid = int(self.db.get('uid')) #Get final uid
 
 		os.chdir(self.originalDir)	
 		return uid
