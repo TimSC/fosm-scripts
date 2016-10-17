@@ -64,7 +64,6 @@ createInsertIntoDb(emailToken)	; Public ; Update database with new pending user
 	; TODO: Need to check if this username is already registered (if sha256Password exists then account has already been registered/claimed
 	;
 	; Stop if there are errors in the form
-	s %sess("errors")=errors
 	s %sess("uid")=0
 	s %sess("emailToken")=""
 	i errors q

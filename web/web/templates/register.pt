@@ -27,7 +27,7 @@
 
 <div id="content">
   <div id="notice">
-	FOSM is licensed under Creative Commons CC-BY-SA 2.0 :: More data than OSM and a better license for contributors.
+	FOSM is licensed under Creative Commons CC-BY-SA 2.0 :: a better license for contributors.
   </div>
   <h2>Create a User Account</h2>
 
@@ -41,14 +41,14 @@ Fill in these details and then wait for an email with instructions on how to act
 
   <div tal:condition="messageOccured" class="errorExplanation" id="errorExplanation">
     <h2>Message</h2>
-    <p>Content</p>
+    <p>${messageContent}</p>
   </div>
 
 <!-- If there are errors then display them here -->
-  <div tal:condition="errorOccured" class="errorExplanation" id="errorExplanation">
-    <h2>There were X errors with this form</h2>
-    <ul>
-    <li>Zonk</li>
+  <div tal:condition="numErrors>0" class="errorExplanation" id="errorExplanation">
+    <h2>There were ${numErrors} errors with this form</h2>
+    <ul tal:repeat="item errorMessages">
+    <li tal:content="item">Err!</li>
     </ul>
   </div>
 

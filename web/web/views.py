@@ -2,7 +2,7 @@ from pyramid.view import view_config
 from pyramid.httpexceptions import HTTPFound
 from pyramid_mailer.message import Message
 from pyramid_mailer import get_mailer
-import gtm_wrapper
+import gtm_wrapper, os, string
 #import nulldb_wrapper
 import transaction
 
@@ -33,29 +33,49 @@ def register_view(request):
 	messageContent = None
 	registerSuccess = False
 
-	errors = 0
+	errors = []
 	if 'form.submitted' in request.params:
 		if userEmail != userEmailConfirmation:
-			errors += 1
+			errors.append(("userEmail", "User email does not match"))
 		if userPassCrypt != userPassCryptConfirmation:
-			errors += 1
+			errors.append(("userPassCrypt", "User passwords does not match"))
 		if len(userPassCrypt) < 6:
-			errors += 1
+			errors.append(("userPassCrypt", "Password is too short"))
 		if len(userDisplayName) < 3:
-			errors += 1
+			errors.append(("userDisplayName", "User name is too short"))
+		if len(userDisplayName) > 64:
+			errors.append(("userDisplayName", "User name is too long"))
 
-		if errors == 0:
+		if len(errors) == 0:
 			uid, errors, emailToken = db_wrapper.create_pending_user(userEmail, userDisplayName, userPassCrypt, claimOsmName)
 
-		if errors == 0:
-			#emailBody = open("templates/confirmemail.txt", "rt").read()
-			emailBody = "test body"
-			message = Message(subject="fosm :: Confirm your account creation request",
-                  sender="80n@xenserver-2.ucsd.edu",
-                  recipients=[userEmail],
-                  body=emailBody)
-			mailer = get_mailer(request)
-			mailer.send(message)
+		if len(errors) == 0:
+			here = os.path.abspath(os.path.dirname(__file__))#Is there a better way to find the path?
+			senderEmail = request.registry.settings["userconfirm.email_sender"]
+
+			#Email user with link to confirm account
+			if len(senderEmail) > 0:
+				emailBody = open(os.path.join(here, "templates/confirmemail.txt"), "rt").read()
+				emailBody = emailBody.format(name=userDisplayName, emailToken=emailToken, host=request.host)
+				message = Message(subject="fosm :: Confirm your account creation request",
+		              sender=senderEmail,
+		              recipients=[userEmail],
+		              body=emailBody)
+				mailer = get_mailer(request)
+				mailer.send(message)
+
+			adminEmails = map(string.strip, request.registry.settings["userconfirm.admin_emails"].split(","))
+
+			#Inform admin by email of new user
+			if len(adminEmails) > 0 and len(senderEmail) > 0:
+				emailBody2 = open(os.path.join(here, "templates/informadmin.txt"), "rt").read()
+				emailBody2 = emailBody2.format(name=userDisplayName, email=userEmail, claimOsmName=claimOsmName, emailToken=emailToken)
+				message2 = Message(subject="fosm signup",
+		              sender=senderEmail,
+		              recipients=adminEmails,
+		              body=emailBody2)
+				mailer.send(message2)
+
 			transaction.commit()
 
 			messageOccured=True
@@ -69,7 +89,8 @@ def register_view(request):
 	return {'logged_in': username,
 		'messageOccured': messageOccured,
 		'messageContent': messageContent,
-		'errorOccured': errors > 0,
+		'numErrors': len(errors),
+		'errorMessages': [tmp[1] for tmp in errors],
 		'userEmail': userEmail,
 		'userEmailConfirmation': userEmailConfirmation,
 		'userDisplayName': userDisplayName,

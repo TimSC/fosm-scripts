@@ -75,7 +75,10 @@ class GtmWrapper(object):
 		self.db.execute(b'd createInsertIntoDb^user')
 	
 		uid = self.db.get('%sess("uid")')
-		errors = int(self.db.get('%sess("errors")')) #Not really working
+		numErrors = int(self.db.get('errors'))
+		errors = []
+		for i in range(1, numErrors+1):
+			errors.append((self.db.get('errors("1","field")'), self.db.get('errors("1","message")')))
 		emailToken = self.db.get('%sess("emailToken")')
 
 		os.chdir(self.originalDir)

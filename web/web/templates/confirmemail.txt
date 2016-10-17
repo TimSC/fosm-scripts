@@ -3,7 +3,7 @@
 Thank you for requesting an account to contribute to fosm.org.
 
 Please click the link below to confirm your request:
-http://www.fosm.org/confirmuser/?token={emailToken}
+http://{host}/confirmuser?token={emailToken}
 
 If you did not apply for an account at FOSM please ignore this message and accept our apologies.
 

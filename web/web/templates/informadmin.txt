@@ -1,0 +1,6 @@
+The following user signed up to fosm
+Name = {name}
+email = {email}
+claim osm = {claimOsmName}
+email token = {emailToken}
+
