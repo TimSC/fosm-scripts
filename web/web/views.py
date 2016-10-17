@@ -1,7 +1,13 @@
 from pyramid.view import view_config
 from pyramid.httpexceptions import HTTPFound
+from pyramid_mailer.message import Message
+from pyramid_mailer import get_mailer
 import gtm_wrapper
 #import nulldb_wrapper
+import transaction
+
+#Favicons etc
+#http://docs.pylonsproject.org/projects/pyramid_cookbook/en/latest/static_assets/files.html
 
 db_wrapper = gtm_wrapper.GtmWrapper()
 
@@ -42,6 +48,16 @@ def register_view(request):
 			uid, errors, emailToken = db_wrapper.create_pending_user(userEmail, userDisplayName, userPassCrypt, claimOsmName)
 
 		if errors == 0:
+			#emailBody = open("templates/confirmemail.txt", "rt").read()
+			emailBody = "test body"
+			message = Message(subject="fosm :: Confirm your account creation request",
+                  sender="80n@xenserver-2.ucsd.edu",
+                  recipients=[userEmail],
+                  body=emailBody)
+			mailer = get_mailer(request)
+			mailer.send(message)
+			transaction.commit()
+
 			messageOccured=True
 			messageContent="Thank you. Please check your email."
 			registerSuccess=True
