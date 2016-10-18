@@ -148,12 +148,17 @@ def confirm_user_view(request):
 
 	token = request.params.get('token')
 	errors = []
+	messageOccured = False
+	messageContent = None
 
-	pendingUid = db_wrapper.get_pending_uid_from_token(token)
-	db_wrapper.confirm_user(pendingUid)
+	try:
+		pendingUid = db_wrapper.get_pending_uid_from_token(token)
+		db_wrapper.confirm_user(pendingUid)
+		messageOccured = True
+		messageContent = "Your account has been confirmed. Welcome to FOSM. You can now use JOSM, Merkaartor and other tools to contribute content. "
 
-	messageOccured = True
-	messageContent = "Your account has been confirmed. Welcome to FOSM. You can now use JOSM, Merkaartor and other tools to contribute content. "
+	except RuntimeError as err:
+		errors.append(str(err))	
 
 	username = None
 	if "username" in request.session:
@@ -163,7 +168,6 @@ def confirm_user_view(request):
 		'messageOccured': messageOccured,
 		'messageContent': messageContent,
 		'numErrors': len(errors),
-		'errorMessages': [tmp[1] for tmp in errors],
-		'errorFields': [tmp[0] for tmp in errors],
+		'errorMessages': errors,
 		}
 

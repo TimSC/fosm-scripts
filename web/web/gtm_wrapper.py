@@ -107,6 +107,7 @@ class GtmWrapper(object):
 
 		self.db.execute(b'd getUidFromToken^user("{0}")'.format(Enc(token)))
 		if not int(self.db.get('exists')):
+			os.chdir(self.originalDir)
 			raise RuntimeError("User not found")
 		uid = int(self.db.get('uid'))
 

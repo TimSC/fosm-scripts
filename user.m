@@ -394,7 +394,7 @@ tellUser(message)	; Tell the user something
 getUidFromToken(token) ; Public get uid from confirmation token
 	;	
 	; Check that the user has a valid token
-	i '$d(^pendingUserx("emailToken",token))
+	i '$d(^pendingUserx("emailToken",token)) d  q
 	. s exists=0
 	. s uid=0
 	. q
@@ -402,7 +402,7 @@ getUidFromToken(token) ; Public get uid from confirmation token
 	s exists=1
 	s uid=^pendingUserx("emailToken",token)
 	;
-	q	
+	q
 
 confirm	; Public ; Confirm account application
 	;
