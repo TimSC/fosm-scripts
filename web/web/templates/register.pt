@@ -26,16 +26,10 @@
 <div id="left" tal:define="leftbar load: leftbar.pt" metal:use-macro="leftbar"></div>
 
 <div id="content">
-  <div id="notice">
-	FOSM is licensed under Creative Commons CC-BY-SA 2.0 :: a better license for contributors.
-  </div>
-  <h2>Create a User Account</h2>
 
-<p>
-Fill in these details and then wait for an email with instructions on how to activate your account.
-</p>
-
-<form action="/register" method="POST">
+<div id="notice">
+FOSM is licensed under Creative Commons CC-BY-SA 2.0 :: a better license for contributors.
+</div>
 
 <!-- If there's a message then display it here -->
 
@@ -52,12 +46,23 @@ Fill in these details and then wait for an email with instructions on how to act
     </ul>
   </div>
 
+<div id="oldhome" tal:condition="registerSuccess" tal:define="oldhome load: oldhome.pt" metal:use-macro="oldhome"/>
+
+<div tal:condition="not registerSuccess"> 
+<h2>Create a User Account</h2>
+
+<p>
+Fill in these details and then wait for an email with instructions on how to activate your account.
+</p>
+
+<form action="/register" method="POST">
+
 <table id="signupForm">
   <tr>
     <td width="300px" class="fieldName">Email Address:</td>
     <td width="400px">
       <div>
-        <input id="userEmail" maxlength="255" name="userEmail" size="50" tabindex="1" type="text" value='${userEmail}'/>
+        <input id="userEmail" maxlength="255" name="userEmail" size="50" tabindex="1" type="text" value='${userEmail}' tal:attributes="class python:'fieldWithErrors' if 'userEmail' in errorFields else ''" />
       </div>
     </td>
   </tr>
@@ -65,7 +70,7 @@ Fill in these details and then wait for an email with instructions on how to act
     <td width="300px" class="fieldName">Confirm Email Address:</td>
     <td width="400px">
       <div>
-        <input id="userEmailConfirmation" maxlength="255" name="userEmailConfirmation" size="50" tabindex="2" type="text" value='${userEmailConfirmation}'/>
+        <input id="userEmailConfirmation" maxlength="255" name="userEmailConfirmation" size="50" tabindex="2" type="text" value='${userEmailConfirmation}' tal:attributes="class python:'fieldWithErrors' if 'userEmailConfirmation' in errorFields else ''"/>
       </div>
     </td>
   </tr>
@@ -81,7 +86,7 @@ Fill in these details and then wait for an email with instructions on how to act
     <td width="300px" class="fieldName">Display Name:</td>
     <td width="400px">
       <div>
-        <input id="userDisplayName" maxlength="255" name="userDisplayName" size="30" tabindex="3" type="text" value='${userDisplayName}'/>
+        <input id="userDisplayName" maxlength="255" name="userDisplayName" size="30" tabindex="3" type="text" value='${userDisplayName}' tal:attributes="class python:'fieldWithErrors' if 'userDisplayName' in errorFields else ''"/>
       </div>
     </td>
   </tr>
@@ -103,7 +108,7 @@ Fill in these details and then wait for an email with instructions on how to act
     <td width="300px" class="fieldName">Password:</td>
     <td width="400px">
       <div>
-        <input id="userPassCrypt" maxlength="255" name="userPassCrypt" size="30" tabindex="5" type="password" value='${userPassCrypt}'/>
+        <input id="userPassCrypt" maxlength="255" name="userPassCrypt" size="30" tabindex="5" type="password" value='${userPassCrypt}' tal:attributes="class python:'fieldWithErrors' if 'userPassCrypt' in errorFields else ''"/>
       </div>
     </td>
   </tr>
@@ -112,7 +117,7 @@ Fill in these details and then wait for an email with instructions on how to act
     <td width="300px" class="fieldName">Confirm Password:</td>
     <td width="400px">
       <div>
-        <input id="userPassCryptConfirmation" maxlength="255" name="userPassCryptConfirmation" size="30" tabindex="6" type="password" value='${userPassCryptConfirmation}'/>
+        <input id="userPassCryptConfirmation" maxlength="255" name="userPassCryptConfirmation" size="30" tabindex="6" type="password" value='${userPassCryptConfirmation}' tal:attributes="class python:'fieldWithErrors' if 'userPassCryptConfirmation' in errorFields else ''"/>
       </div>
     </td>
   </tr>
@@ -132,7 +137,7 @@ href='http://creativecommons.org/licenses/by-sa/2.0/'>Creative Commons Attributi
   <tr><td></td><td align="right"><input type="submit" name="form.submitted" value="Create Account" tabindex="6"/></td></tr>
 </table>
 </form>
-
+</div>
 </div>
 
 </body>

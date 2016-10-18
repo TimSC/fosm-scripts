@@ -78,7 +78,7 @@ class GtmWrapper(object):
 		numErrors = int(self.db.get('errors'))
 		errors = []
 		for i in range(1, numErrors+1):
-			errors.append((self.db.get('errors("1","field")'), self.db.get('errors("1","message")')))
+			errors.append((self.db.get('errors("{0}","field")'.format(i)), self.db.get('errors("{0}","message")'.format(i))))
 		emailToken = self.db.get('%sess("emailToken")')
 
 		os.chdir(self.originalDir)

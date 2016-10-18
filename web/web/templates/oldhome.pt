@@ -1,0 +1,38 @@
+<div id="oldhome" metal:define-macro="oldhome">
+    <p class='emphasis'>FOSM is a free map of the planet which anyone can use and contribute to.  It is very similar to OpenStreetMap
+	except that it has more data and is licensed under the well-known Creative Commons attribution
+	and share-alike license CC-BY-SA.</p>
+
+    <p>Currently FOSM provides a reasonably functional API, but not all methods are available at this time.  Edits to existing OpenStreetMap content is
+
+mirrored here normally within just a few minutes.</p>
+
+    <p>Editing is now beta.  If you would like to try it out just <a href='/user/new'>create an account</a> and configure your favorite editor.</p>
+
+<p><b>Potlatch.</b>  Click <a href='/p2/potlatchFosm.xml'>here</a> to edit with Potlatch 2.  This is the successor to the original Potlatch and while it's still under development I already prefer it and it's starting to be a rival to JOSM.</p>
+
+<p><b>JOSM.</b>  The API has been tested with JOSM.  To contribute to FOSM you will need to make the following configuration change:
+        <ul>
+        <li>Within JOSM go to Preferences (from the menu Select Edit/Preferences or press F12).</li>
+        <li>Select the Connection Settings tab, which is the second one down.</li>
+        <li>Change the Base Server URL from http://www.openstreetmap.org/api to http://api.fosm.org/api</li>
+        <li>Change the username and password to those of your FOSM account.</li>
+        </ul>
+</p>
+<p><b>Merkaartor.</b>  The API has been tested with Merkaartor.  To use it you will need to make the following configuration changes:
+         <ul>
+         <li>Within Merkaartor go to Tools/Preferences and select the Data tab.</li>
+         <li>Change the Website from http://www.openstreetmap.org to http://api.fosm.org</li>
+         <li>Change the username and password to those of your FOSM account.</li>
+         </ul>
+</p>
+
+<p>Diff files here: <a href='/planet/minute-replicate'>http://planet.fosm.org/planet/minute-replicate</a></p>
+
+<p>View conflicts: <a href='/api/0.6/user/conflicts'>http://api.fosm.org/api/0.6/user/conflicts</a></p>
+
+    <p>All geospatial content published on this site is Copyright FOSM, OpenStreetMap and contributors and licensed under CC-BY-SA 2.0</p>
+<iframe src="http://www.facebook.com/widgets/like.php?href=http://www.fosm.org"
+        scrolling="no" frameborder="0"
+        style="border:none; width:450px; height:80px"></iframe>
+</div>

@@ -2,7 +2,7 @@ from pyramid.view import view_config
 from pyramid.httpexceptions import HTTPFound
 from pyramid_mailer.message import Message
 from pyramid_mailer import get_mailer
-import gtm_wrapper, os, string
+import gtm_wrapper, os, string, re
 #import nulldb_wrapper
 import transaction
 
@@ -19,6 +19,10 @@ def home_view(request):
 		username = request.session["username"]
 
 	return {'logged_in': username}
+
+def ValidateEmailFormat(addressToVerify):
+	match = re.match('^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,4})$', addressToVerify)
+	return match is not None
 
 @view_config(route_name='register', renderer='templates/register.pt')
 def register_view(request):
@@ -45,6 +49,8 @@ def register_view(request):
 			errors.append(("userDisplayName", "User name is too short"))
 		if len(userDisplayName) > 64:
 			errors.append(("userDisplayName", "User name is too long"))
+		if not ValidateEmailFormat(userEmail):
+			errors.append(("userEmail", "Not a correct email address"))
 
 		if len(errors) == 0:
 			uid, errors, emailToken = db_wrapper.create_pending_user(userEmail, userDisplayName, userPassCrypt, claimOsmName)
@@ -91,6 +97,7 @@ def register_view(request):
 		'messageContent': messageContent,
 		'numErrors': len(errors),
 		'errorMessages': [tmp[1] for tmp in errors],
+		'errorFields': [tmp[0] for tmp in errors],
 		'userEmail': userEmail,
 		'userEmailConfirmation': userEmailConfirmation,
 		'userDisplayName': userDisplayName,
