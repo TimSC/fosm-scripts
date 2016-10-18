@@ -1,0 +1,7 @@
+<div id="loginstatus" metal:define-macro="loginstatus">
+	<p class="small" align="right">${username} 
+	<a href="/register" tal:condition="not username">register</a>
+	<a href="/login" tal:condition="not username">log in</a>
+	<a href="/logout" tal:condition="username">log out</a></p>
+</div>
+

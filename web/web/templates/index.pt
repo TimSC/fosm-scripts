@@ -44,7 +44,7 @@
 				<p>New contributors are very welcome.</p>
 				<p>If you would like to try it out just <a href="/user/new">create an
 				account</a> and configure your favorite editor. We currently support JOSM and Merkaartor.
-				Please see our <a href="gettingStarted.html">getting started</a> page for more information.</p>
+				Please see our <a href="/getting_started">getting started</a> page for more information.</p>
 				<p>Please check our <a href="http://fosm.wikia.com">wiki</a> for further help and please also 
 				join our <a href="http://groups.google.com/group/osm-fork">mailing list</a> to keep up-to-date 
 				with current developments.</p>
@@ -64,7 +64,7 @@
 			<p class="footer">All geospatial content published on this site is the copyright 
 			of fosm contributors and OpenStreetMap contributors. It is licensed under 
 			<a href="http://creativecommons.org/licenses/by-sa/2.0/">CC&nbsp;BY-SA 2.0</a>. 
-			Please refer to our <a href="copyright.html">copyright and license</a> page for details.</p>
+			Please refer to our <a href="/copyright">copyright and license</a> page for details.</p>
 		</div>
 	</div>
 

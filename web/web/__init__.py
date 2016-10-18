@@ -18,6 +18,9 @@ def main(global_config, **settings):
 	config.add_route('login', '/login')
 	config.add_route('logout', '/logout')
 	config.add_route('confirmuser', '/confirmuser')
+	config.add_route('getting_started', '/getting_started')
+	config.add_route('whats_different', '/whats_different')
+	config.add_route('copyright', '/copyright')
 	config.scan()
 	return config.make_wsgi_app()
 

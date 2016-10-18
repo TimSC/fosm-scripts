@@ -170,10 +170,38 @@ def confirm_user_view(request):
 	if "username" in request.session:
 		username = request.session["username"]
 
-	return {'logged_in': username,
+	return {'username': username,
 		'messageOccured': messageOccured,
 		'messageContent': messageContent,
 		'numErrors': len(errors),
 		'errorMessages': errors,
 		}
+
+@view_config(route_name='getting_started', renderer='templates/getting_started.pt')
+def getting_started_view(request):
+
+	username = None
+	if "username" in request.session:
+		username = request.session["username"]
+
+	return {'username': username,}
+
+@view_config(route_name='whats_different', renderer='templates/whats_different.pt')
+def whats_different_view(request):
+
+	username = None
+	if "username" in request.session:
+		username = request.session["username"]
+
+	return {'username': username,}
+
+@view_config(route_name='copyright', renderer='templates/copyright.pt')
+def copyright_view(request):
+
+	username = None
+	if "username" in request.session:
+		username = request.session["username"]
+
+	return {'username': username,}
+
 
