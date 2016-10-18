@@ -10,9 +10,7 @@
 <body>
 	<div id="container">
 		<div id="header">
-			<p class="small" align="right"><a href="/register">register</a>
-			<a href="/login">log in</a>
-			<a href="/logout">log out</a></p>
+			<div tal:define="loginstatus load: loginstatus.pt" metal:use-macro="loginstatus"></div>
 		</div>
 
 		<div id="title">
@@ -37,9 +35,6 @@
 			also work with fosm.</p>
 			<p>A full copy of our planet earth database is available <a href="/planet/">here</a> and   
 			minutely replication files are available <a href="/planet/minute-replicate/">here</a>.</p>
-
-			<p>${logged_in}</p>
-
 		</div>
 
 		<div id="col2outer">

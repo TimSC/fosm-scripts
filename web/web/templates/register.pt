@@ -21,7 +21,9 @@
 	<title>FOSM :: Create account</title>
 </head>
 <body>
-<span tal:define="greeting load: greeting.pt" metal:use-macro="greeting"></span>
+<div id="greeting"><div tal:define="loginstatus load: loginstatus.pt" metal:use-macro="loginstatus"></div></div>
+
+<div tal:define="loginstatus load: loginstatus.pt" metal:use-macro="loginstatus"></div>
 
 <div id="left" tal:define="leftbar load: leftbar.pt" metal:use-macro="leftbar"></div>
 

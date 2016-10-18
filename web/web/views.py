@@ -18,7 +18,7 @@ def home_view(request):
 	if "username" in request.session:
 		username = request.session["username"]
 
-	return {'logged_in': username}
+	return {'username': username}
 
 def ValidateEmailFormat(addressToVerify):
 	match = re.match('^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,4})$', addressToVerify)
@@ -105,6 +105,7 @@ def register_view(request):
 		'userPassCryptConfirmation': userPassCryptConfirmation,
 		'claimOsmName': claimOsmName,
 		'registerSuccess': registerSuccess,
+		'username': username,
 		}
 
 @view_config(route_name='login', renderer='templates/login.pt')
@@ -129,11 +130,16 @@ def login_view(request):
 			return HTTPFound(location=came_from)
 		message = 'Failed login'
 
+	username = None
+	if "username" in request.session:
+		username = request.session["username"]
+
 	return {'url': request.application_url + '/login',
 			'login': login,
 			'password': password,
 			'came_from': came_from,
 			'message': message,
+			'username': username,
 		}
 
 @view_config(route_name='logout')
