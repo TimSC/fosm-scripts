@@ -143,14 +143,27 @@ def logout_view(request):
 	url = request.route_url('home')
 	return HTTPFound(location=url)
 
-@view_config(route_name='confirmuser')
+@view_config(route_name='confirmuser', renderer='templates/confirmuser.pt')
 def confirm_user_view(request):
 
 	token = request.params.get('token')
+	errors = []
 
 	pendingUid = db_wrapper.get_pending_uid_from_token(token)
 	db_wrapper.confirm_user(pendingUid)
 
-	url = request.route_url('home')
-	return HTTPFound(location=url)
+	messageOccured = True
+	messageContent = "Your account has been confirmed. Welcome to FOSM. You can now use JOSM, Merkaartor and other tools to contribute content. "
+
+	username = None
+	if "username" in request.session:
+		username = request.session["username"]
+
+	return {'logged_in': username,
+		'messageOccured': messageOccured,
+		'messageContent': messageContent,
+		'numErrors': len(errors),
+		'errorMessages': [tmp[1] for tmp in errors],
+		'errorFields': [tmp[0] for tmp in errors],
+		}
 

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0"/>
+	<meta name="description" content="FOSM. Free maps created by a global community of volunteers. Licensed for use freely with attribution and share-alike (CC-BY-SA)." />
+	<meta name="keywords" content="FOSM, OSM, Map, free, CC-BY-SA, wiki, geodata, cartography, ODbL" />
+
+	<link href="/static/stylesheets/common.css" media="screen" rel="stylesheet" type="text/css" />
+	<link href="/static/stylesheets/large.css" media="screen" rel="stylesheet" type="text/css" />
+	<link href="/static/stylesheets/small.css" media="only screen and (max-width: 481px)" rel="stylesheet" type="text/css" />
+	<link href="/static/stylesheets/large.css" media="screen and (min-width: 482px)" rel="stylesheet" type="text/css" />
+	<link href="/static/stylesheets/print.css" media="print" rel="stylesheet" type="text/css" />
+	<style>
+	  .hidden { display: none }
+	  .hide_if_logged_in { display: none }
+	  .hide_if_user_ { display: none }
+	  .show_if_user_ { display: inline }
+	  .hide_unless_administrator { display: none }
+	</style>
+
+	<title>FOSM :: Confirmed account</title>
+</head>
+<body>
+<span tal:define="greeting load: greeting.pt" metal:use-macro="greeting"></span>
+
+<div id="left" tal:define="leftbar load: leftbar.pt" metal:use-macro="leftbar"></div>
+
+<div id="content">
+
+<div id="notice">
+FOSM is licensed under Creative Commons CC-BY-SA 2.0 :: a better license for contributors.
+</div>
+
+<!-- If there's a message then display it here -->
+
+  <div tal:condition="messageOccured" class="errorExplanation" id="errorExplanation">
+    <h2>Confirmation</h2>
+    <p>${messageContent}</p>
+  </div>
+
+<!-- If there are errors then display them here -->
+  <div tal:condition="numErrors>0" class="errorExplanation" id="errorExplanation">
+    <h2>There were ${numErrors} errors.</h2>
+    <ul tal:repeat="item errorMessages">
+    <li tal:content="item">Err!</li>
+    </ul>
+  </div>
+
+<div id="oldhome" tal:define="oldhome load: oldhome.pt" metal:use-macro="oldhome"/>
+
+</div>
+
+</body>
+</html>
